@@ -1,0 +1,148 @@
+@import './styles/tokens.css';
+
+@font-face {
+  font-family: 'Fakt Pro';
+  src: url('./fonts/FaktPro-Regular.woff2') format('woff2');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+html[data-origin-theme='superhuman'][data-origin-mode='light'] {
+  --origin-font-family-sans-default: 'Fakt Pro', '-apple-system', 'Segoe UI', sans-serif;
+  --origin-font-family-sans-secondary: 'Fakt Pro', '-apple-system', 'Segoe UI', sans-serif;
+  --origin-font-family-heading-default: 'Fakt Pro', '-apple-system', 'Segoe UI', sans-serif;
+  --origin-font-family-heading-large: 'Fakt Pro', '-apple-system', 'Segoe UI', sans-serif;
+  --origin-font-family-heading-medium: 'Fakt Pro', '-apple-system', 'Segoe UI', sans-serif;
+  --origin-font-family-heading-small: 'Fakt Pro', '-apple-system', 'Segoe UI', sans-serif;
+  --origin-font-family-heading-xlarge: 'Fakt Pro', '-apple-system', 'Segoe UI', sans-serif;
+  --origin-font-family-heading-xsmall: 'Fakt Pro', '-apple-system', 'Segoe UI', sans-serif;
+  --origin-font-family-heading-xxsmall: 'Fakt Pro', '-apple-system', 'Segoe UI', sans-serif;
+}
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  background-color: #fff;
+  color: var(--origin-color-text-base-default);
+  font-family: var(--origin-font-family-sans-default);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-text-shimmer {
+    animation: none !important;
+    background: none !important;
+    -webkit-text-fill-color: inherit;
+    color: var(--origin-color-text-base-default);
+  }
+}
+
+.reduce-motion .animate-text-shimmer {
+  animation: none !important;
+  background: none !important;
+  -webkit-text-fill-color: inherit;
+  color: var(--origin-color-text-base-default);
+}
+
+/*
+ * Motion CSS vars are stamped onto :root from `src/motion/tokens.ts`
+ * (`applyMotionCssVars` in main.tsx). Do not hardcode durations or eases here.
+ */
+.motion-header {
+  transition-property: padding-bottom, border-color;
+  transition-timing-function: var(--motion-ease-standard);
+  transition-duration: var(--motion-duration-toggle);
+}
+
+.motion-header-settle {
+  transition-duration: var(--motion-duration-settle);
+}
+
+.reduce-motion .motion-header,
+.reduce-motion .motion-header-settle {
+  transition-duration: var(--motion-duration-instant);
+}
+
+/* Libra app button layer. Primary is black, not the Origin purple token. */
+.btn {
+  align-items: center;
+  appearance: none;
+  background: transparent;
+  border: none;
+  border-radius: var(--origin-radius-button-small);
+  box-sizing: border-box;
+  color: var(--origin-color-text-base-default);
+  cursor: pointer;
+  display: inline-flex;
+  font-family: inherit;
+  font-size: 12px;
+  font-weight: 500;
+  gap: 6px;
+  height: 30px;
+  justify-content: center;
+  line-height: 1;
+  padding: 0 10px;
+  white-space: nowrap;
+}
+
+.btn:focus-visible {
+  outline: 2px solid var(--origin-color-text-base-default);
+  outline-offset: 2px;
+}
+
+.btn-primary {
+  background: var(--origin-color-text-base-default);
+  color: var(--origin-color-text-base-inverse);
+}
+
+.btn-primary:hover {
+  background: var(--origin-color-background-base-inverse);
+}
+
+.btn-secondary {
+  background: var(--origin-color-background-base-default);
+  box-shadow: inset 0 0 0 1px var(--origin-color-border-base-subdued);
+  color: var(--origin-color-text-base-default);
+}
+
+.btn-secondary:hover {
+  background: var(--origin-color-background-base-subdued);
+}
+
+.btn-icon-only {
+  width: 30px;
+  min-width: 30px;
+  padding: 0;
+  gap: 0;
+}
+
+.btn-pressed.btn-primary {
+  background: var(--origin-color-text-base-default);
+}
+
+@keyframes insight-step-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.insight-step {
+  animation: insight-step-in var(--motion-duration-toggle-calm) var(--motion-ease-enter) both;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .insight-step {
+    animation: none;
+  }
+}
+
+.reduce-motion .insight-step {
+  animation: none;
+}

@@ -1,0 +1,19 @@
+---
+description: Spinner tempo maps model effort, not a single speed
+globs: src/motion/spinCycle.ts,src/hooks/useSmoothedSpin.ts,src/data/mockScenarios.ts,src/components/ReasoningTrace/ActiveState.tsx
+alwaysApply: false
+---
+
+# Spinner semantics
+
+While a source is `indexing`, the spinner uses that document's `effort` — not a blanket `spin.intense`.
+
+| Effort | Token | Meaning |
+| heavy commentary / thinking | `spin.deep` | takes longer to reason |
+| case law / clarifying | `spin.moderate` | steady read |
+| statute / index scan | `spin.intense` | quick |
+
+- Hold a token for about one revolution so the speed is readable.
+- Change speed with `useSmoothedSpin` (attack fast, release slow). Never restart CSS `animation-duration` mid-spin.
+- Keep the file being read in the visible pill row so tempo matches a pill.
+- Reduced motion: freeze rotation.

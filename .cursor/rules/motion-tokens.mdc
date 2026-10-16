@@ -1,0 +1,29 @@
+---
+description: Libra motion tokens — never invent durations or eases
+globs: src/motion/**/*.ts,src/components/ReasoningTrace/**/*.{ts,tsx},src/index.css,src/main.tsx
+alwaysApply: false
+---
+
+# Motion tokens
+
+Import `motion` from `src/motion/tokens.ts`. Do not inline cubic-bezier arrays or duration literals. New timing = a named token, then consume it.
+
+| Role | Token |
+| card / popover enter | `motion.ease.enter` + `duration.enter` (or `popover`) |
+| accordion open/close | `motion.ease.standard` + `duration.toggle` |
+| finish handoff | `motion.ease.settle` + `duration.settle` |
+| chevron | `microTransition()` |
+| spinner speed | `motion.spin.deep \| moderate \| intense` |
+| speed change | `motion.spin.attack` / `release` |
+
+```tsx
+// ❌ BAD
+transition={{ duration: 0.25, ease: [0.16, 1, 0.3, 1] }}
+
+// ✅ GOOD
+transition={traceTransition({ reduceMotion })}
+```
+
+- Reduced motion → `motion.duration.instant`, no spin, no shimmer.
+- CSS uses `var(--motion-*)` / `var(--spin-*)` stamped by `applyMotionCssVars()`.
+- Origin `--origin-accordion-animation-*` is unused by the trace — do not mix unless migrating on purpose.
